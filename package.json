@@ -1,0 +1,25 @@
+{
+   "name": "facnrecipe",
+   "version": "1.0.0",
+   "description": "simple recipe application for facn community",
+   "main": "server.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node src/server.js"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/facn2/facnrecipe.git"
+   },
+   "author": "Paul, Leo, Heather",
+   "license": "ISC",
+   "bugs": {
+      "url": "https://github.com/facn2/facnrecipe/issues"
+   },
+   "homepage": "https://github.com/facn2/facnrecipe#readme",
+   "dependencies": {
+      "env2": "^2.2.0",
+      "nodemon": "^1.11.0",
+      "pg": "^7.1.0"
+   }
+}

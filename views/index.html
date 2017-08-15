@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>FACN Recipe-- Simple application to search/add recipe for FoundersandCoders Naraeth</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css?family=Slabo+27px|Chewy|PT+Sans+Narrow:400,700|Roboto:300,400,500,700|Zilla+Slab+Highlight:400,700" rel="stylesheet">
+
+  <link rel="stylesheet" href="./views/style.css">
+</head>
+
+<body>
+  <p class="logo">Facn Recipe</p>
+  <img class="logo-img" src="./views/assets/fac.png" alt="fac-logo">
+  <main>
+    <section class="banner">
+      <h1>What's for dinner?</h1>
+    </section>
+    <div class="add-container" id="add-container">
+      <div class="add-button-container" id="add-button-container">
+        <button id="add-recipe" class="add-recipe" type="button" name="button">Add Your Recipe </button>
+      </div>
+    </div>
+  </main>
+
+  <div id="overlay" class="overlay">
+    <div class="helper">
+
+
+      <form id="add-form" class="add-form" action="/add" method="post">
+        <select name="origin">
+        <option value="Asian">Asian</option>
+        <option value="Arabic">Arabic</option>
+        <option value="Italian">Italian</option>
+        <option value="British">British</option>
+      </select>
+        <input class="recipe-name" type="text" name="name" value="" placeholder="Title" required>
+        <textarea class="ingredients" rows="5" cols="50" name="ingredients" placeholder="Please add ingredients..." required></textarea>
+        <textarea class="directions" rows="5" cols="50" name="directions" placeholder="Please add directions..." required></textarea>
+
+        <button class="add-button" type="submit" name="button">Add Your Recipe</button>
+        <button class="cancel-button" id="cancel">Cancel</button>
+      </form>
+    </div>
+  </div>
+  <div id="button-container">
+  </div>
+  <div id='recipe-container'>
+  </div>
+  <script type="text/javascript" src="./views/index.js"></script>
+</body>
+
+</html>
