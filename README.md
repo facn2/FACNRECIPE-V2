@@ -7,12 +7,15 @@ Click [here] (https://facnrecipev2.herokuapp.com/) to start FACN Recipe applicat
 ### User story:
 As a student of Founders & Coders based in Nazareth, she/he can search recipes by clicking four different categories based on the origin of food.
 
++ User can login with a user ID and password
 + User can browse for available recipes
 + User can filter recipes by origin food type
++ User can add, edit and delete recipes
 
 ### diagrams (schema, architecture, wire-frame):
-![Alt text](https://monosnap.com/file/37A8JtIqoB6S6TyvgCZdrPAc4TVlj8.png)
-![Alt text](https://monosnap.com/file/NXiCDsdPyZ6BbME6xSxZK1XPb5Yp0Q.png)
+![Alt text](https://monosnap.com/file/IvNwzyZJTS93RzytXcW6GiNl01lJtb.png)
+![Alt text](https://monosnap.com/file/jBqm0WHyC84VfPqqyZonMLGQ2H2QsK.png)
+![Alt text](https://monosnap.com/file/R5TkkdirugRSsf16SKHGbk0qDIKD2c.png)
 
 
 
@@ -29,9 +32,9 @@ As a student of Founders & Coders based in Nazareth, she/he can search recipes b
 + Clear user journey (even if you take one of our suggested ideas, document the user journey in your readme)
 
 ### Stretch goals
-+ Function for adding recipes to database
-+ Function for editing/deleting recipes
-+ Implement authentication for admins to edit/delete posts(recipe)  
++ Admin Login
++ Admin Interface
++ Admin functionality - Delete & Add users & Posts
 
 ### Rules
 + All branches should be understood and reviewed by all team members prior to pushing/merging to master
