@@ -54,9 +54,8 @@ if (endpoint === '') {
                    if(result){
                      //set jwt cookie, userid and post he made
                      const userDetails = {
-                       is_loggedin : true,
-                      //  user_id:,
-                      //  post_id:
+                       is_loggedin : true
+                      //  user_id
                      }
                      const jwtCookie = sign(userDetails, SECRET);
                      response.writeHead(302, {'location': '/recipe',
