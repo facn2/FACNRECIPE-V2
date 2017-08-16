@@ -126,7 +126,7 @@ function updateDom(err, data) {
 
 
       var postedBy = document.createElement("li");
-      postedBy.innerHTML = "<strong>Posted By:</strong> " + recipe.username + " <br><br>";
+      postedBy.innerHTML = "<i>Posted By:</i> " + recipe.username;
       recipeBox.appendChild(postedBy);
       ul.appendChild(recipeBox);
 
