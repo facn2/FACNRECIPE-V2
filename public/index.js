@@ -1,10 +1,15 @@
+var username = document.getElementById('welcomeUser');
+
 var logout = document.getElementById('logout');
-logout.addEventListener('click', function(e){
-  request('/logout', function(err, res){
-    if(err) console.log(err);
-    window.location.replace('/');
+if(logout){
+  logout.addEventListener('click', function(e){
+    request('/logout', function(err, res){
+      if(err) console.log(err);
+      window.location.replace('/');
+    });
   });
-});
+}
+
 
 var addButton = document.getElementById('add-recipe');
 addButton.addEventListener('click', function(e) {
