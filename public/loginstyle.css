@@ -130,7 +130,7 @@ a, a:hover {
   height: 120px;
   margin-bottom: 30px;
   display:inline-block;
-  /*Will change for the routing*/
+  /* why doesnt need /public?*/
   background: url('./assets/fac.png');
   /*background-position:-55px 10px;*/
   border-radius:50%;
