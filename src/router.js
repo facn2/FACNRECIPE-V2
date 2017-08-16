@@ -94,7 +94,6 @@ const router = (request, response) => {
       handlers.handlerForViews(request, response, '/public/login.html');
     }
   } else if (endpoint === 'recipe') {
-    console.log('hit recipe');
     if (request.headers.cookie) {
       const {
         jwt
@@ -105,7 +104,6 @@ const router = (request, response) => {
       // console.log(typeof token.is_loggedin);
       login = token.is_loggedin;
       if (login) {
-        console.log(login);
         handlers.handlerForViews(request, response, '/public/index.html');
       } else {
          response.writeHead(401, 'content-type:text/html');
@@ -150,8 +148,7 @@ const router = (request, response) => {
       } = parse(request.headers.cookie);
       // I know it is bad to sync method for jwt
       const token = verify(jwt, SECRET);
-      //why token was send 5 times?
-      // console.log(typeof token.is_loggedin);
+      // console.log(token);
       login = token.is_loggedin;
       userId = token.user_id;
       if (login) {
@@ -188,7 +185,8 @@ const router = (request, response) => {
       response.writeHead(401, 'content-type:text/html');
       response.end("<a href='/'>you need to login. try again</a>");
     }
-  } else if (endpoint.indexOf('public') !== -1) {
+  }
+   else if (endpoint.indexOf('public') !== -1) {
     handlers.handlerForViews(request, response, request.url);
   } else if (endpoint === 'logout') {
     response.writeHead(302, {
