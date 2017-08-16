@@ -108,8 +108,8 @@ const router = (request, response) => {
         console.log(login);
         handlers.handlerForViews(request, response, '/public/index.html');
       } else {
-        response.writeHead(401, 'content-type:text/html');
-        response.end("<a href='/'>you need to login. try again</a>");
+         response.writeHead(401, 'content-type:text/html');
+         response.end("<a href='/'>you need to login. try again</a>");
       }
     } else {
       response.writeHead(401, 'content-type:text/html');
@@ -136,8 +136,8 @@ const router = (request, response) => {
           response.end(data);
         });
       } else {
-        response.writeHead(401, 'content-type:text/html');
-        response.end("<a href='/'>you need to login. try again</a>");
+         response.writeHead(401, 'content-type:text/html');
+         response.end("<a href='/'>you need to login. try again</a>");
       }
     } else {
       response.writeHead(401, 'content-type:text/html');
@@ -181,8 +181,8 @@ const router = (request, response) => {
           response.end();
         });
       } else {
-        response.writeHead(401, 'content-type:text/html');
-        response.end("<a href='/'>you need to login. try again</a>");
+         response.writeHead(401, 'content-type:text/html');
+         response.end("<a href='/'>you need to login. try again</a>");
       }
     } else {
       response.writeHead(401, 'content-type:text/html');
