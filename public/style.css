@@ -167,6 +167,7 @@ select, .add-button, .cancel-button {
 }
 
 
+
 /*buttons in add container*/
 
 .add-recipe, .goback-button {
@@ -181,6 +182,23 @@ select, .add-button, .cancel-button {
   border: 0.1rem black solid;
   background-color: rgba(255, 255, 255, 0.7);
 }
+
+#logout {
+   width: 15%;
+   height: 4rem;
+   font-size: 1.5rem;
+   border-radius: 5px;
+   line-height: 55px;
+   border: 0.1rem solid #47a04b;
+   background-color: black;
+   opacity: 0.8;
+   color: white;
+   font-weight: bold;
+   text-align: center;
+
+}
+
+
 
 
 /*design for bigger screen devices */
@@ -209,6 +227,11 @@ select, .add-button, .cancel-button {
     flex-wrap: wrap;
     margin-bottom: 30px;
   }
+
+  #logoutSpan {
+     padding-left: 25px;
+  }
+
   .recipe-box {
     margin: 10px auto;
     width: 70%;
@@ -249,4 +272,69 @@ select, .add-button, .cancel-button {
   .disappear {
     display: none;
   }
+}
+
+@media (max-width: 450px){
+
+   .logo {
+
+        overflow: hidden;
+        /*position: absolute;*/
+      	width: 100%;
+      	height: 50px;
+        text-align: center;
+        background: rgba(71, 160, 75, 0.9);
+        transition: linear 0.5s;
+        padding: 10px;
+        font-size: 40px;
+        color: white;
+        background: black;
+        opacity: .8;
+   }
+
+
+   /*.logo {
+     margin-top: 3%;
+     text-decoration: underline;
+     display: block;
+     text-align: center;
+     font-size: 1.2rem;
+     font-weight: bold;
+     padding-top: 20px;
+   }*/
+
+   .logo-img {
+     display: block;
+     margin: 0 auto;
+     width: 9rem;
+     height: 8rem;
+   }
+   body {
+      padding-bottom: 20px;
+   }
+
+   #logout {
+      width: 30%;
+      height: 4rem;
+      font-size: 1.5rem;
+      border-radius: 5px;
+      line-height: 55px;
+      border: 0.1rem solid #47a04b;
+      background-color: black;
+      opacity: 0.8;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+
+   }
+
+   #logoutSpan {
+      padding-left: 10px;
+   }
+
+
+
+
+
+
 }
