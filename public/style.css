@@ -227,6 +227,11 @@ select, .add-button, .cancel-button {
     flex-wrap: wrap;
     margin-bottom: 30px;
   }
+
+  #logoutSpan {
+     padding-left: 25px;
+  }
+
   .recipe-box {
     margin: 10px auto;
     width: 70%;
@@ -269,17 +274,22 @@ select, .add-button, .cancel-button {
   }
 }
 
-@media (max-width: 400px){
+@media (max-width: 450px){
 
    .logo {
 
         overflow: hidden;
-        position: absolute;
-      	width: 360px;
+        /*position: absolute;*/
+      	width: 100%;
       	height: 50px;
         text-align: center;
         background: rgba(71, 160, 75, 0.9);
         transition: linear 0.5s;
+        padding: 10px;
+        font-size: 40px;
+        color: white;
+        background: black;
+        opacity: .8;
    }
 
 
@@ -299,6 +309,31 @@ select, .add-button, .cancel-button {
      width: 9rem;
      height: 8rem;
    }
+   body {
+      padding-bottom: 20px;
+   }
+
+   #logout {
+      width: 30%;
+      height: 4rem;
+      font-size: 1.5rem;
+      border-radius: 5px;
+      line-height: 55px;
+      border: 0.1rem solid #47a04b;
+      background-color: black;
+      opacity: 0.8;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+
+   }
+
+   #logoutSpan {
+      padding-left: 10px;
+   }
+
+
+
 
 
 
