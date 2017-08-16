@@ -9,6 +9,7 @@ const { parse } = require('cookie');
 const { sign, verify } = require('jsonwebtoken');
 const SECRET = 'There is no secret';
 let login;
+let userId;
 
 const router = (request, response) => {
 
@@ -43,7 +44,7 @@ if (endpoint === '') {
        });
        request.on('end', () => {
           const {username, password} = qs.parse(str);
-          const pwFromDb = `SELECT password FROM users where username=$1;`;
+          const pwFromDb = `SELECT * FROM users where username=$1;`;
           dbConnection.query(pwFromDb, [username], (err, res) => {
              if (err) {
                 console.log(err)
@@ -54,8 +55,9 @@ if (endpoint === '') {
                    if(result){
                      //set jwt cookie, userid and post he made
                      const userDetails = {
-                       is_loggedin : true
-                      //  user_id
+                       is_loggedin : true,
+                       user_id:res.rows[0].id,
+                       username: res.rows[0].username
                      }
                      const jwtCookie = sign(userDetails, SECRET);
                      response.writeHead(302, {'location': '/recipe',
@@ -136,6 +138,7 @@ if (endpoint === '') {
        //why token was send 5 times?
       // console.log(typeof token.is_loggedin);
       login = token.is_loggedin;
+      userId = token.user_id;
       if(login){
         let str = '';
         request.on('data', (chunk) => {
@@ -149,8 +152,8 @@ if (endpoint === '') {
               origin
            } = qs.parse(str);
            //need to add user id
-           const updateData = `INSERT INTO recipe (recipe_name, recipe_ingredients, recipe_directions, recipe_origin) VALUES ($1, $2, $3, $4);`;
-           dbConnection.query(updateData, [name, ingredients, directions, origin], (err, res) => {
+           const updateData = `INSERT INTO recipe (recipe_name, recipe_ingredients, recipe_directions, recipe_origin, user_id) VALUES ($1, $2, $3, $4, $5);`;
+           dbConnection.query(updateData, [name, ingredients, directions, origin, userId], (err, res) => {
               if (err) {
                  console.log(err)
               } else {
