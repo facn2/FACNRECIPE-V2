@@ -78,6 +78,7 @@ document.getElementById('british').addEventListener("click", function() {
 function request(url, cb) {
   var xhr = new XMLHttpRequest();
   xhr.addEventListener("load", function() {
+    console.log(xhr.responseText);
     cb(null, xhr.responseText);
   });
   xhr.addEventListener("error", function() {
