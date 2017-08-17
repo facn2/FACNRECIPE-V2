@@ -3,7 +3,7 @@ if(username){
   request('/getName', function(err, res){
     if(err) console.log(err);
     console.log(res);
-    username.innerText = 'Hello '+ res + '~ ';
+    username.innerText = 'Hello '+ res + ', ';
   });
 }
 
