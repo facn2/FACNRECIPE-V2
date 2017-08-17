@@ -3,8 +3,8 @@ const {
 } = require('pg');
 const url = require('url');
 
-const env = require('env2');
-env('./config.env');
+// const env = require('env2');
+// env('./config.env');
 
 if (!process.env.FACN_DB_URL) {
    throw new Error('Environment variable DATABASE_URL must be set');
