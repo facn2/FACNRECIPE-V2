@@ -1,4 +1,11 @@
 var username = document.getElementById('welcomeUser');
+if(username){
+  request('/getName', function(err, res){
+    if(err) console.log(err);
+    console.log(res);
+    username.innerText = 'Hello '+ res + '~ ';
+  });
+}
 
 var logout = document.getElementById('logout');
 if(logout){
@@ -12,14 +19,20 @@ if(logout){
 
 
 var addButton = document.getElementById('add-recipe');
-addButton.addEventListener('click', function(e) {
-  document.getElementById("overlay").style.display = "block";
-});
+if(addButton){
+  addButton.addEventListener('click', function(e) {
+    document.getElementById("overlay").style.display = "block";
+  });
+}
+
 
 var cancelButton = document.getElementById('cancel');
-cancelButton.addEventListener('click', function(e) {
-  document.getElementById("overlay").style.display = "none";
-})
+if(cancelButton){
+  cancelButton.addEventListener('click', function(e) {
+    document.getElementById("overlay").style.display = "none";
+  })
+}
+
 
 var div = document.getElementById("recipe-container");
 //div for showing the result

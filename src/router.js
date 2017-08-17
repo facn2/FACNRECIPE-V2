@@ -4,6 +4,8 @@ const getData = require('./getData');
 const handlers = require('./handlers');
 const dbConnection = require('../database/db_connection');
 const bcrypt = require('./bcrypthash');
+const parseCookie = require('./checkCookie');
+const errFunc = require('./errFunc');
 const {
   parse
 } = require('cookie');
@@ -26,25 +28,14 @@ const router = (request, response) => {
 
   if (endpoint === '') {
     if (request.headers.cookie) {
-      const {
-        jwt
-      } = parse(request.headers.cookie);
-      // I know it is bad to sync method for jwt
-      const token = verify(jwt, SECRET);
-      //why token was send 5 times?
-      // console.log(typeof token.is_loggedin);
-      login = token.is_loggedin;
-      if (login) {
-        response.writeHead(302, {
-          'location': '/recipe'
-        });
-        response.end();
-      } else {
-        response.writeHead(302, {
-          'location': '/'
-        });
-        response.end();
-      }
+      parseCookie(request.headers.cookie,
+      ()=>{
+          response.writeHead(302, {
+            'location': '/recipe'
+          });
+          response.end();
+      },
+      ()=> errFunc.errClearCookies(response));
     } else if (request.method == "POST") {
       let str = '';
       request.on('data', (chunk) => {
@@ -78,7 +69,7 @@ const router = (request, response) => {
                   response.end();
                 } else {
                   response.writeHead(401, 'content-type:text/html');
-                  response.end("<a href='/'>wrong passord. try again</a>");
+                  response.end("<a href='/'>wrong password. try again</a>");
                 }
               });
             } else {
@@ -89,40 +80,19 @@ const router = (request, response) => {
         });
       });
     } else if (request.method == "GET") {
-      console.log('hit get /');
       handlers.handlerForViews(request, response, '/public/login.html');
     }
   } else if (endpoint === 'recipe') {
     if (request.headers.cookie) {
-      const {
-        jwt
-      } = parse(request.headers.cookie);
-      // I know it is bad to sync method for jwt
-      const token = verify(jwt, SECRET);
-      //why token was send 5 times?
-      // console.log(typeof token.is_loggedin);
-      login = token.is_loggedin;
-      if (login) {
-        handlers.handlerForViews(request, response, '/public/index.html');
-      } else {
-         response.writeHead(401, 'content-type:text/html');
-         response.end("<a href='/'>you need to login. try again</a>");
-      }
-    } else {
-      response.writeHead(401, 'content-type:text/html');
-      response.end("<a href='/'>you need to login. try again</a>");
-    }
+      parseCookie(request.headers.cookie,
+      ()=>handlers.handlerForViews(request, response, '/public/index.html'),
+      ()=>errFunc.errNeedLogin(response)
+    );
+    } else errFunc.errNeedLogin(response);
   } else if (endpoint.match("^(Asian|Arabic|British|Italian)$")) {
     if (request.headers.cookie) {
-      const {
-        jwt
-      } = parse(request.headers.cookie);
-      // I know it is bad to sync method for jwt
-      const token = verify(jwt, SECRET);
-      //why token was send 5 times?
-      // console.log(typeof token.is_loggedin);
-      login = token.is_loggedin;
-      if (login) {
+      parseCookie(request.headers.cookie,
+      ()=>{
         getData(endpoint, (err, res) => {
           if (err)
             return console.log('error querying the db');
@@ -132,25 +102,14 @@ const router = (request, response) => {
           });
           response.end(data);
         });
-      } else {
-         response.writeHead(401, 'content-type:text/html');
-         response.end("<a href='/'>you need to login. try again</a>");
-      }
-    } else {
-      response.writeHead(401, 'content-type:text/html');
-      response.end("<a href='/'>you need to login. try again</a>");
-    }
+      },
+      ()=>errFunc.errNeedLogin(response)
+    );
+  } else errFunc.errNeedLogin(response);
   } else if (endpoint === 'add') {
     if (request.headers.cookie) {
-      const {
-        jwt
-      } = parse(request.headers.cookie);
-      // I know it is bad to sync method for jwt
-      const token = verify(jwt, SECRET);
-      // console.log(token);
-      login = token.is_loggedin;
-      userId = token.user_id;
-      if (login) {
+      parseCookie(request.headers.cookie,
+      (token)=>{
         let str = '';
         request.on('data', (chunk) => {
           str += chunk;
@@ -164,7 +123,7 @@ const router = (request, response) => {
           } = qs.parse(str);
           //need to add user id
           const updateData = `INSERT INTO recipe (recipe_name, recipe_ingredients, recipe_directions, recipe_origin, user_id) VALUES ($1, $2, $3, $4, $5);`;
-          dbConnection.query(updateData, [name, ingredients, directions, origin, userId], (err, res) => {
+          dbConnection.query(updateData, [name, ingredients, directions, origin, token.user_id], (err, res) => {
             if (err) {
               console.log(err)
             } else {
@@ -176,21 +135,22 @@ const router = (request, response) => {
           });
           response.end();
         });
-      } else {
-         response.writeHead(401, 'content-type:text/html');
-         response.end("<a href='/'>you need to login. try again</a>");
-      }
-    } else {
-      response.writeHead(401, 'content-type:text/html');
-      response.end("<a href='/'>you need to login. try again</a>");
-    }
+      },
+      ()=>errFunc.errNeedLogin(response)
+    );
+    } else errFunc.errNeedLogin(response);
   }
    else if (endpoint.indexOf('public') !== -1) {
     handlers.handlerForViews(request, response, request.url);
-  } else if (endpoint === 'logout') {
+  }
+  else if (endpoint==='getName') {
+    if (request.headers.cookie) {
+      parseCookie(request.headers.cookie, token=>response.end(token.username),
+      ()=>errFunc.errNeedLogin(response));
+    } else errFunc.errNeedLogin(response);
+ } else if (endpoint === 'logout') {
     response.writeHead(302, {
-      //  'location':'/', don't know why redirect doesnt work
-      //got type as xhr
+      //redirect done in front end
       'Set-Cookie': 'jwt=0; max-age=0;'
     });
     response.end();
