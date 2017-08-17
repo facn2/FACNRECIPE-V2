@@ -2,7 +2,7 @@
 Simple recipe application for members of Founders & Coders community in Nazareth
 
 ### To get started:
-Click [here] (https://facnrecipev2.herokuapp.com/) to start FACN Recipe application
+Click [here] (https://facnrecipe-v2.herokuapp.com/) to start FACN Recipe application
 
 ### User story:
 As a student of Founders & Coders based in Nazareth, she/he can search recipes by clicking four different categories based on the origin of food.
